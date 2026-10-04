@@ -1,5 +1,5 @@
 // ==========================================
-// GRADETRACK
+// GRADEFlow
 // Student Grade Management System
 // ==========================================
 
@@ -28,7 +28,7 @@ let currentSubject = {
 let savedSubjects =
     JSON.parse(
         localStorage.getItem(
-            "gradeTrackSubjects"
+            "gradeFlowSubjects"
         )
     ) || [];
 
@@ -85,7 +85,7 @@ function toggleDarkMode() {
         );
 
     localStorage.setItem(
-        "gradeTrackDark",
+        "gradeFlowDark",
         enabled
     );
 
@@ -104,7 +104,7 @@ darkModeBtn.addEventListener(
 
 if (
     localStorage.getItem(
-        "gradeTrackDark"
+        "gradeFlowDark"
     ) === "true"
 ) {
 
@@ -855,7 +855,7 @@ function saveData() {
 
 
     localStorage.setItem(
-        "gradeTrackSubjects",
+        "gradeFlowSubjects",
         JSON.stringify(
             savedSubjects
         )
