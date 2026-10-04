@@ -113,7 +113,10 @@ GradeFlow is designed to work on:
 
 ## 📸 Preview
 
-![GradeFlow Preview](Video.mp4)
+<img width="1310" height="690" alt="Image" src="https://github.com/user-attachments/assets/0ef14795-3ee7-4213-80aa-2fb0f7c21617" />
+<img width="1312" height="691" alt="Image" src="https://github.com/user-attachments/assets/d1735bc2-0e0c-43aa-8053-fb83858c1309" />
+<img width="1308" height="693" alt="Image" src="https://github.com/user-attachments/assets/a363a9e0-183e-4376-97a5-53d010981ed7" />
+<img width="1308" height="690" alt="Image" src="https://github.com/user-attachments/assets/849ada80-c8ce-4d48-9cb6-9cd045d9d05f" />
 
 ## 🎯 Project Goals
 
