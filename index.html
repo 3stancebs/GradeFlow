@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GradeFlow | Student Grade Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            Grade<span>Flow</span>
+        </div>
+
+        <div class="nav-buttons">
+            <button id="darkModeBtn" class="icon-btn" title="Toggle dark mode">
+                🌙
+            </button>
+
+            <button id="saveBtn" class="icon-btn" title="Save grades">
+                💾
+            </button>
+        </div>
+    </nav>
+</header>
+
+<main class="container">
+
+    <section class="hero">
+        <h1>GradeFlow</h1>
+
+        <p>
+            GradeFlow is a simple tool that helps students calculate their grades based on their scores and the grading system used by their school. It allows you to input your scores for written works, performance tasks, and exams, and it will calculate your final grade and GPA estimate.
+        </p>
+    </section>
+
+
+    <div class="grid">
+
+        <!-- SUBJECT SETTINGS -->
+        <section class="card">
+
+            <h2>📚 Subject</h2>
+
+            <div class="form-group">
+
+                <label for="subjectName">
+                    Subject Name
+                </label>
+
+                <input
+                    id="subjectName"
+                    type="text"
+                    placeholder="e.g. General Mathematics"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="gradingPreset">
+                    Grading System
+                </label>
+
+                <select id="gradingPreset">
+
+                    <option value="custom">
+                        Custom
+                    </option>
+
+                    <option value="shs-core" selected>
+                        SHS Core / Academic — 20 / 50 / 30
+                    </option>
+
+                    <option value="shs-field">
+                        SHS Field Exposure — 15 / 70 / 15
+                    </option>
+
+                    <option value="shs-arts">
+                        SHS Arts / Sports / Health — 20 / 60 / 20
+                    </option>
+
+                    <option value="shs-research">
+                        SHS Research — 40 / 60 / 0
+                    </option>
+
+                    <option value="shs-techpro">
+                        SHS TechPro — 15 / 65 / 20
+                    </option>
+
+                    <option value="work-immersion">
+                        Work Immersion — 20 / 80 / 0
+                    </option>
+
+                    <option value="old-305020">
+                        Older System — 30 / 50 / 20
+                    </option>
+
+                </select>
+
+            </div>
+
+            <p class="note">
+                Choose a preset or select Custom to enter your own
+                school's grading weights.
+            </p>
+
+        </section>
+
+
+        <!-- WEIGHTS -->
+        <section class="card">
+
+            <h2>⚙️ Grading Weights</h2>
+
+            <div class="weights">
+
+                <div class="weight-box">
+
+                    <label for="wwWeight">
+                        Written Works (%)
+                    </label>
+
+                    <input
+                        id="wwWeight"
+                        type="number"
+                        min="0"
+                        max="100"
+                        value="20"
+                    >
+
+                </div>
+
+
+                <div class="weight-box">
+
+                    <label for="ptWeight">
+                        Performance (%)
+                    </label>
+
+                    <input
+                        id="ptWeight"
+                        type="number"
+                        min="0"
+                        max="100"
+                        value="50"
+                    >
+
+                </div>
+
+
+                <div class="weight-box">
+
+                    <label for="examWeight">
+                        Exam (%)
+                    </label>
+
+                    <input
+                        id="examWeight"
+                        type="number"
+                        min="0"
+                        max="100"
+                        value="30"
+                    >
+
+                </div>
+
+            </div>
+
+            <div id="weightTotal" class="weight-total">
+                Total: 100%
+            </div>
+
+        </section>
+
+
+        <!-- ASSESSMENTS -->
+        <section class="card full">
+
+            <h2>📝 Assessments</h2>
+
+
+            <!-- WRITTEN WORKS -->
+            <div class="assessment-section">
+
+                <div class="section-title">
+
+                    <h3>
+                        Written Works
+                    </h3>
+
+                    <button
+                        id="addWWBtn"
+                        class="btn primary"
+                    >
+                        + Add Written Work
+                    </button>
+
+                </div>
+
+                <div id="wwList"></div>
+
+            </div>
+
+
+            <!-- PERFORMANCE TASKS -->
+            <div class="assessment-section">
+
+                <div class="section-title">
+
+                    <h3>
+                        Performance Tasks
+                    </h3>
+
+                    <button
+                        id="addPTBtn"
+                        class="btn primary"
+                    >
+                        + Add Performance Task
+                    </button>
+
+                </div>
+
+                <div id="ptList"></div>
+
+            </div>
+
+
+            <!-- EXAMS -->
+            <div class="assessment-section">
+
+                <div class="section-title">
+
+                    <h3>
+                        Examinations
+                    </h3>
+
+                    <button
+                        id="addExamBtn"
+                        class="btn primary"
+                    >
+                        + Add Exam
+                    </button>
+
+                </div>
+
+                <div id="examList"></div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    id="calculateBtn"
+                    class="btn primary"
+                >
+                    🧮 Calculate Grade
+                </button>
+
+                <button
+                    id="saveMainBtn"
+                    class="btn success"
+                >
+                    💾 Save
+                </button>
+
+                <button
+                    id="exportBtn"
+                    class="btn secondary"
+                >
+                    📥 Export CSV
+                </button>
+
+                <button
+                    id="clearBtn"
+                    class="btn danger"
+                >
+                    🗑 Clear
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTS -->
+        <section class="card full">
+
+            <h2>📊 Results</h2>
+
+            <div class="results">
+
+                <div class="result-box">
+
+                    <small>
+                        Written Works
+                    </small>
+
+                    <div
+                        id="wwResult"
+                        class="result-number"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <small>
+                        Performance Tasks
+                    </small>
+
+                    <div
+                        id="ptResult"
+                        class="result-number"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <small>
+                        Examination
+                    </small>
+
+                    <div
+                        id="examResult"
+                        class="result-number"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+
+                <div class="result-box">
+
+                    <small>
+                        Initial Grade
+                    </small>
+
+                    <div
+                        id="initialResult"
+                        class="result-number"
+                    >
+                        —
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="grade-display">
+
+                <div>
+                    FINAL GRADE
+                </div>
+
+                <div
+                    id="finalGrade"
+                    class="big-grade"
+                >
+                    —
+                </div>
+
+                <p id="gradeStatus">
+                    Enter your scores to calculate
+                </p>
+
+                <p id="descriptor">
+                    —
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CHART -->
+        <section class="card">
+
+            <h2>📊 Performance</h2>
+
+            <div class="chart">
+
+                <div class="bar-row">
+
+                    <div class="bar-label">
+
+                        <span>
+                            Written Works
+                        </span>
+
+                        <span id="wwChartText">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            id="wwBar"
+                            class="bar-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bar-row">
+
+                    <div class="bar-label">
+
+                        <span>
+                            Performance Tasks
+                        </span>
+
+                        <span id="ptChartText">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            id="ptBar"
+                            class="bar-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bar-row">
+
+                    <div class="bar-label">
+
+                        <span>
+                            Exam
+                        </span>
+
+                        <span id="examChartText">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="bar">
+
+                        <div
+                            id="examBar"
+                            class="bar-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GPA -->
+        <section class="card">
+
+            <h2>🎓 GPA Estimate</h2>
+
+            <div
+                id="gpa"
+                class="gpa-display"
+            >
+                —
+            </div>
+
+            <p class="note">
+                This is an estimated 4.0-scale conversion.
+                Your school may use a different GPA system.
+            </p>
+
+        </section>
+
+
+        <!-- SAVED SUBJECTS -->
+        <section class="card full">
+
+            <h2>📚 Saved Subjects</h2>
+
+            <div
+                id="subjectList"
+                class="subject-list"
+            >
+                No saved subjects yet.
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer>
+    GradeTrack • Student Grade Management System
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
